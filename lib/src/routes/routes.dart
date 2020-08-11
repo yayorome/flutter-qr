@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_sqlite/src/pages/directions_page.dart';
 import 'package:qr_sqlite/src/pages/home_page.dart';
+import 'package:qr_sqlite/src/pages/map_page.dart';
 import 'package:qr_sqlite/src/pages/maps_page.dart';
 
 Map<String, WidgetBuilder> getAppRoutes() {
@@ -8,5 +9,6 @@ Map<String, WidgetBuilder> getAppRoutes() {
     '/': (BuildContext context) => HomePage(),
     'maps': (BuildContext context) => MapsPage(),
     'directions': (BuildContext context) => DirectionsPage(),
+    'map': (BuildContext context) => MapPage()
   };
 }

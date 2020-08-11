@@ -7,6 +7,7 @@ class MapsPage extends StatelessWidget {
   final scansBloc = new ScansBloc();
   @override
   Widget build(BuildContext context) {
+    scansBloc.getAllScans();
     return StreamBuilder<List<ScanModel>>(
       stream: scansBloc.scansStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -29,7 +30,7 @@ class MapsPage extends StatelessWidget {
             onDismissed: (direction) => scansBloc.deleteScan(scans[index].uid),
             child: ListTile(
               leading: Icon(
-                Icons.cloud_queue,
+                Icons.map,
                 color: Theme.of(context).primaryColor,
               ),
               title: Text(scans[index].value),
@@ -38,7 +39,7 @@ class MapsPage extends StatelessWidget {
                 Icons.keyboard_arrow_right,
                 color: Colors.grey,
               ),
-              onTap: () => utils.launchScan(scans[index]),
+              onTap: () => utils.launchScan(context, scans[index]),
             ),
           ),
         );

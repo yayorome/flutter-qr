@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:qr_sqlite/src/bloc/validator.dart';
 import 'package:qr_sqlite/src/providers/db_provider.dart';
 
-class ScansBloc {
+class ScansBloc with Validators {
   static final ScansBloc _scansBloc = new ScansBloc._internal();
 
   factory ScansBloc() {
@@ -15,7 +16,10 @@ class ScansBloc {
 
   final _scansController = StreamController<List<ScanModel>>.broadcast();
 
-  Stream<List<ScanModel>> get scansStream => _scansController.stream;
+  Stream<List<ScanModel>> get scansStream =>
+      _scansController.stream.transform(validateGeo);
+  Stream<List<ScanModel>> get scansStreamHttp =>
+      _scansController.stream.transform(validateHttp);
 
   getAllScans() async {
     _scansController.sink.add(await DBProvider.db.selectScans());

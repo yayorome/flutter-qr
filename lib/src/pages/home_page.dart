@@ -68,10 +68,10 @@ class _HomePageState extends State<HomePage> {
     return FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: _scanQR);
+        onPressed: () => _scanQR(context));
   }
 
-  _scanQR() async {
+  _scanQR(BuildContext context) async {
     // http://www.yit.com.mx
     final geo = 'geo:40.68675513364264,-73.96748915156253';
 
@@ -92,10 +92,10 @@ class _HomePageState extends State<HomePage> {
 
       if (Platform.isIOS) {
         Future.delayed(Duration(milliseconds: 750), () {
-          utils.launchScan(scan);
+          utils.launchScan(context, scan);
         });
       } else {
-        utils.launchScan(scan);
+        utils.launchScan(context, scan);
       }
     }
   }
